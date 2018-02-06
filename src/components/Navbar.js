@@ -1,19 +1,16 @@
 import styled from "styled-components";
 import React from "react";
-import { Logo } from "./styled";
 
 const Header = styled.header`
-  display: grid;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
-  grid-template-columns: auto 1fr;
-  font-size: 20px;
-  grid-auto-flow: column;
-  align-items: center;
-  /* grid-gap: 30px; */
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #384049;
+  font-size: 20px;
   padding: 30px 20px;
   transition: padding 0.3s;
   z-index: 1;
@@ -32,7 +29,22 @@ const Header = styled.header`
       : ""};
 `;
 
-export class Navbar extends React.Component {
+const Logo = styled.a`
+  white-space: nowrap;
+  svg {
+    border-right: 1px solid ${props => props.theme.color.gray};
+    padding-right: 20px;
+    color: ${props => props.theme.color.pink};
+  }
+
+  .paynterings {
+    padding-left: 20px;
+    font-family: "Montez", cursive;
+    font-size: 35px;
+  }
+`;
+
+class Navbar extends React.Component {
   componentDidMount() {
     this.props.getNavHeight(this.header);
   }
@@ -47,9 +59,10 @@ export class Navbar extends React.Component {
           <i className="fa fa-home" />
           <span className="paynterings">Paynterings</span>
         </Logo>
-        <span />
         <a href="#">about</a>
       </Header>
     );
   }
 }
+
+export default Navbar;
