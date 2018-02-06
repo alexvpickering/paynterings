@@ -47,10 +47,7 @@ class Home extends React.Component {
       <div>
         <HeroImage navHeight={this.state.navHeight} />
         <Navbar getNavHeight={this.getNavHeight} sticky={this.state.sticky} />
-        sticky={this.state.sticky}
-        navHeight={this.state.navHeight}
-        >
-        <Main>
+        <Main sticky={this.state.sticky} navHeight={this.state.navHeight}>
           {/* <div className="item">1</div>
           <div className="item">2</div>
           <div className="item">3</div>

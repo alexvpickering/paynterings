@@ -12,22 +12,22 @@ export const HeroImage = styled.div`
 
 export const Main = styled.div`
   display: grid;
-  padding-top: ${props => (props.sticky ? props.navHeight + 50 + 2 : 50)}px; 
+  padding-top: ${props => (props.sticky ? props.navHeight + 50 + 2 : 50)}px;
   /* background: blue; */
-  /* background: ${props => props.theme.color.white}; */
-  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-template-columns: 550px 550px;
   grid-column-gap: 20px;
   grid-row-gap: 50px;
-  max-width: 1200px;
-  padding: 50px;
 
-  @media (max-width: 1050px) {
-    grid-template-columns: auto;
+  @media (max-width: 1200px) {
+    grid-template-columns: minmax(auto, 550px);
+    padding-right: 5px;
+    padding-left: 5px;
+    grid-row-gap: 20px;
   }
 
-  /* padding-top: ${props =>
+  padding-top: ${props =>
     props.sticky ? props.navHeight + 60 : props.navHeight}px;
-  transition: padding 0.3s; */
 `;
 
 export const Logo = styled.a`
