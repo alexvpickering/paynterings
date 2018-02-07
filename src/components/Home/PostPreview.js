@@ -5,7 +5,7 @@ import "react-html5video/dist/styles.css";
 
 const PreviewWrapper = styled.div`
   background-color: white;
-  border-radius: 6px;
+  border-radius: ${props => props.theme.border.radius};
   border: 1px solid ${props => props.theme.color.gray};
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
 `;

@@ -2,27 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
 import registerServiceWorker from "./registerServiceWorker";
+import { Provider } from "react-redux";
+import store from "./store.js";
+
 import { injectGlobal, ThemeProvider } from "styled-components";
-import theme from "./utils/theme";
-import rh5v from "./utils/rh5v";
+import styledNormalize from "styled-normalize";
+import { theme, rh5v, global } from "./utils/styles";
 
 injectGlobal`
-  body {
-    box-sizing: border-box;
-    font-family: Martel,serif;
-    margin: 0;
-    font-size: 18px;
-    color: #384049;
-  }
-
+  /* Normalize styles */
+  ${styledNormalize}
+  /* Global styles */
+  ${global}
   /* Override react-html5video */
   ${rh5v}
 `;
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );
 registerServiceWorker();

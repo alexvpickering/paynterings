@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = styled.header`
   display: flex;
@@ -9,7 +10,6 @@ const Header = styled.header`
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #384049;
   font-size: 20px;
   padding: 30px 20px;
   transition: padding 0.3s;
@@ -29,12 +29,12 @@ const Header = styled.header`
       : ""};
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   white-space: nowrap;
   svg {
     border-right: 1px solid ${props => props.theme.color.gray};
     padding-right: 20px;
-    color: ${props => props.theme.color.pink};
+    color: ${props => props.theme.color.primary};
   }
 
   .paynterings {
@@ -46,7 +46,7 @@ const Logo = styled.a`
 
 class Navbar extends React.Component {
   componentDidMount() {
-    this.props.getNavHeight(this.header);
+    if (this.props.getNavHeight) this.props.getNavHeight(this.header);
   }
 
   render() {
@@ -55,11 +55,11 @@ class Navbar extends React.Component {
         innerRef={input => (this.header = input)}
         sticky={this.props.sticky}
       >
-        <Logo href="#">
+        <Logo to="/">
           <i className="fa fa-home" />
           <span className="paynterings">Paynterings</span>
         </Logo>
-        <a href="#">about</a>
+        <Link to="/login">login</Link>
       </Header>
     );
   }
