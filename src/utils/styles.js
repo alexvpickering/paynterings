@@ -4,7 +4,8 @@ export const theme = {
   color: {
     gray: "rgba(0,0,0,0.1)",
     white: "#fafafa",
-    primary: "#ff2c96"
+    primary: "#ff2c96",
+    text: "#384049"
   },
 
   padding: {
@@ -14,6 +15,11 @@ export const theme = {
 
   border: {
     radius: "2px"
+  },
+
+  media: {
+    small: "630px",
+    large: "1200px"
   }
 };
 
@@ -29,7 +35,8 @@ export const global = css`
   h2 {
     font-family: Martel, serif;
     font-weight: 100;
-    padding-bottom: 20px;
+    margin: 0;
+    padding-bottom: 30px;
   }
 `;
 

@@ -10,7 +10,7 @@ const PostGrid = styled.div`
 
   ${mainPadding};
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${props => props.theme.media.large}) {
     grid-template-columns: minmax(auto, 550px);
     grid-row-gap: 20px;
     ${minSides};

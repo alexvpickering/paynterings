@@ -18,14 +18,13 @@ const TextWrapper = styled.div`
 const Title = styled.div`
   /* background: green; */
   padding: 20px;
-  color: #384049;
 `;
 
 const Date = styled.div`
   /* background: red; */
   white-space: nowrap;
   padding: 20px;
-  /* color: #384049; */
+  color: gray;
   text-align: right;
 `;
 

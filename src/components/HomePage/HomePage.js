@@ -9,7 +9,7 @@ import PostGrid from "./PostGrid";
 import HeroImage from "./HeroImage";
 import PostPreview from "./PostPreview";
 
-const Home = ({ sticky, navHeight, getNavHeight, posts }) => {
+const HomePage = ({ sticky, navHeight, getNavHeight, posts }) => {
   console.log("rendering");
   return (
     <div>
@@ -29,7 +29,7 @@ const Home = ({ sticky, navHeight, getNavHeight, posts }) => {
   );
 };
 
-Home.propTypes = {
+HomePage.propTypes = {
   sticky: PropTypes.bool.isRequired,
   navHeight: PropTypes.number.isRequired,
   getNavHeight: PropTypes.func.isRequired,
@@ -38,5 +38,5 @@ Home.propTypes = {
 
 // connect to store
 export default connect(state => ({ posts: state.posts }), dispatch => ({}))(
-  Home
+  HomePage
 );

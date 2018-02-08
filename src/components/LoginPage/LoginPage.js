@@ -3,20 +3,19 @@ import Navbar from "../Navbar";
 import PropTypes from "prop-types";
 import LoginForm from "./LoginForm";
 
-const Login = ({ sticky, navHeight, getNavHeight }) => {
+const LoginPage = ({ navHeight, getNavHeight }) => {
   console.log("rendering");
   return (
     <div>
-      <Navbar getNavHeight={getNavHeight} sticky={sticky} />
+      <Navbar getNavHeight={getNavHeight} />
       <LoginForm />
     </div>
   );
 };
 
-Login.propTypes = {
-  sticky: PropTypes.bool.isRequired,
+LoginPage.propTypes = {
   navHeight: PropTypes.number.isRequired,
   getNavHeight: PropTypes.func.isRequired
 };
 
-export default Login;
+export default LoginPage;

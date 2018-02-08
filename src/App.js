@@ -1,6 +1,7 @@
 import React from "react";
-import Home from "./components/Home/Home";
-import Login from "./components/Login/Login";
+import HomePage from "./components/HomePage/HomePage";
+import LoginPage from "./components/LoginPage/LoginPage";
+import AddPage from "./components/AddPage/AddPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends React.Component {
@@ -40,7 +41,7 @@ class App extends React.Component {
             exact
             path="/"
             render={() => (
-              <Home
+              <HomePage
                 sticky={this.state.sticky}
                 navHeight={this.state.navHeight}
                 getNavHeight={this.getNavHeight}
@@ -51,8 +52,17 @@ class App extends React.Component {
             exact
             path="/login"
             render={() => (
-              <Login
-                sticky={this.state.sticky}
+              <LoginPage
+                navHeight={this.state.navHeight}
+                getNavHeight={this.getNavHeight}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/add"
+            render={() => (
+              <AddPage
                 navHeight={this.state.navHeight}
                 getNavHeight={this.getNavHeight}
               />
