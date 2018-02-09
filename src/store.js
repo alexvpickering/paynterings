@@ -1,13 +1,21 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
-import reducers from "./reducers/index";
+import * as reducers from "./reducers";
 import posts from "./data/posts";
+
+const defaultStore = {
+  sticky: false,
+  navHeight: 0,
+  isAuthenticated: false,
+  isAuthenticating: true,
+  posts
+};
 
 const loggerMiddleware = createLogger();
 const store = createStore(
   combineReducers(reducers),
-  { posts },
+  defaultStore,
   applyMiddleware(thunkMiddleware, loggerMiddleware)
 );
 
