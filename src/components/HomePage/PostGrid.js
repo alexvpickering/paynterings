@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainPadding, minSides } from "../../utils/styles";
+import { mainPadding, minSides } from "../../styles";
 
 const PostGrid = styled.div`
   display: grid;

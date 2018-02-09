@@ -1,19 +1,37 @@
 import React from "react";
-import HomePage from "./components/HomePage/HomePage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import AddPage from "./components/AddPage/AddPage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import Routes from "./Routes";
+import { authUser } from "./libs/awsLib";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       sticky: false,
-      navHeight: 0
+      navHeight: 0,
+      isAuthenticated: false,
+      isAuthenticating: true
     };
   }
 
-  componentDidMount() {
+  userHasAuthenticated = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
+  };
+
+  handleLogout = event => {
+    this.userHasAuthenticated(false);
+  };
+
+  async componentDidMount() {
+    try {
+      if (await authUser()) {
+        this.userHasAuthenticated(true);
+      }
+    } catch (e) {
+      alert(e);
+    }
+
+    this.setState({ isAuthenticating: false });
+
     window.addEventListener("scroll", this.handleScroll);
   }
 
@@ -35,41 +53,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router basename={process.env.PUBLIC_URL}>
-        <div>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <HomePage
-                sticky={this.state.sticky}
-                navHeight={this.state.navHeight}
-                getNavHeight={this.getNavHeight}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/login"
-            render={() => (
-              <LoginPage
-                navHeight={this.state.navHeight}
-                getNavHeight={this.getNavHeight}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/add"
-            render={() => (
-              <AddPage
-                navHeight={this.state.navHeight}
-                getNavHeight={this.getNavHeight}
-              />
-            )}
-          />
-        </div>
-      </Router>
+      !this.state.isAuthenticating && (
+        <Routes
+          sticky={this.state.sticky}
+          navHeight={this.state.navHeight}
+          getNavHeight={this.getNavHeight}
+          isAuthenticated={this.state.isAuthenticated}
+          userHasAuthenticated={this.userHasAuthenticated}
+          handleLogout={this.handleLogout}
+        />
+      )
     );
   }
 }

@@ -49,6 +49,13 @@ class Navbar extends React.Component {
     if (this.props.getNavHeight) this.props.getNavHeight(this.header);
   }
 
+  handleLogout = e => {
+    e.preventDefault();
+    console.log("loging out");
+
+    this.props.handleLogout();
+  };
+
   render() {
     return (
       <Header
@@ -59,7 +66,13 @@ class Navbar extends React.Component {
           <i className="fa fa-home" />
           <span className="paynterings">Paynterings</span>
         </Logo>
-        <Link to="/login">login</Link>
+        {this.props.isAuthenticated ? (
+          <Link to="/logout" onClick={this.handleLogout}>
+            logout
+          </Link>
+        ) : (
+          <Link to="/login">login</Link>
+        )}
       </Header>
     );
   }

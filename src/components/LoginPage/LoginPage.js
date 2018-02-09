@@ -3,12 +3,25 @@ import Navbar from "../Navbar";
 import PropTypes from "prop-types";
 import LoginForm from "./LoginForm";
 
-const LoginPage = ({ navHeight, getNavHeight }) => {
-  console.log("rendering");
+const LoginPage = ({
+  history,
+  navHeight,
+  getNavHeight,
+  userHasAuthenticated,
+  isAuthenticated,
+  handleLogout
+}) => {
   return (
     <div>
-      <Navbar getNavHeight={getNavHeight} />
-      <LoginForm />
+      <Navbar
+        getNavHeight={getNavHeight}
+        isAuthenticated={isAuthenticated}
+        handleLogout={handleLogout}
+      />
+      <LoginForm
+        userHasAuthenticated={userHasAuthenticated}
+        history={history}
+      />
     </div>
   );
 };

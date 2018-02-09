@@ -4,10 +4,11 @@ import App from "./App.js";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import store from "./store.js";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { injectGlobal, ThemeProvider } from "styled-components";
 import styledNormalize from "styled-normalize";
-import { theme, rh5v, global } from "./utils/styles";
+import { theme, rh5v, global } from "./styles";
 
 injectGlobal`
   /* Normalize styles */
@@ -21,7 +22,9 @@ injectGlobal`
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <Router basename={process.env.PUBLIC_URL}>
+        <App />
+      </Router>
     </ThemeProvider>
   </Provider>,
   document.getElementById("root")

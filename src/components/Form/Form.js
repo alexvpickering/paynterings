@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mainPadding, minSides } from "../../utils/styles";
+import { mainPadding, minSides } from "../../styles";
 import ReactS3Uploader from "react-s3-uploader";
 
 export const FormContainer = styled.div`
@@ -25,7 +25,7 @@ export const Input = styled.input`
   width: 100%;
   min-width: 280px;
   margin: 20px 0px;
-  padding: 10px 25px;
+  padding: 10px 15px;
   font: inherit;
   border-radius: ${props => props.theme.border.radius};
 `;
@@ -79,7 +79,7 @@ export const UploadLabel = styled.label`
   top: 20px;
   height: 42px;
   box-sizing: border-box;
-  padding: 10px 25px;
+  padding: 10px 15px;
   border-radius: ${props => props.theme.border.radius};
   border: 1px solid ${props => props.theme.color.gray};
 

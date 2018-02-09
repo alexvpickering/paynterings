@@ -9,12 +9,24 @@ import PostGrid from "./PostGrid";
 import HeroImage from "./HeroImage";
 import PostPreview from "./PostPreview";
 
-const HomePage = ({ sticky, navHeight, getNavHeight, posts }) => {
+const HomePage = ({
+  sticky,
+  navHeight,
+  getNavHeight,
+  isAuthenticated,
+  handleLogout,
+  posts
+}) => {
   console.log("rendering");
   return (
     <div>
       <HeroImage navHeight={navHeight} />
-      <Navbar getNavHeight={getNavHeight} sticky={sticky} />
+      <Navbar
+        getNavHeight={getNavHeight}
+        sticky={sticky}
+        isAuthenticated={isAuthenticated}
+        handleLogout={handleLogout}
+      />
       <PostGrid sticky={sticky} navHeight={navHeight}>
         {posts.map((post, i) => (
           <PostPreview
@@ -33,6 +45,7 @@ HomePage.propTypes = {
   sticky: PropTypes.bool.isRequired,
   navHeight: PropTypes.number.isRequired,
   getNavHeight: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   posts: PropTypes.array.isRequired
 };
 
