@@ -61,8 +61,10 @@ export const rh5v = css`
 `;
 
 export const mainPadding = css`
-  padding-top: ${props => (props.sticky ? props.navHeight + 50 : 50)}px;
-  padding-bottom: ${props => props.theme.padding.minEnds};
+  ${props =>
+    props.sticky
+      ? "padding-top: 94px; margin-top: 58px;"
+      : "padding-top: 50px; transition: padding-top 0.3s;"};
 `;
 
 export const minSides = css`

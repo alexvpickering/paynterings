@@ -1,37 +1,19 @@
 import React from "react";
 import Routes from "./Routes";
 import { authUser } from "./libs/awsLib";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { updateSticky } from "./actions/actionCreators";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      sticky: false,
-      navHeight: 0,
-      isAuthenticated: false,
-      isAuthenticating: true
-    };
-  }
+  handleScroll = event => {
+    const { navHeight, sticky: oldSticky, updateSticky } = this.props,
+      newSticky = window.pageYOffset > window.innerHeight - navHeight;
 
-  userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
+    if (newSticky !== oldSticky) updateSticky(newSticky);
   };
 
-  handleLogout = event => {
-    this.userHasAuthenticated(false);
-  };
-
-  async componentDidMount() {
-    try {
-      if (await authUser()) {
-        this.userHasAuthenticated(true);
-      }
-    } catch (e) {
-      alert(e);
-    }
-
-    this.setState({ isAuthenticating: false });
-
+  componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
 
@@ -39,32 +21,28 @@ class App extends React.Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = e => {
-    const sticky =
-      window.pageYOffset > window.innerHeight - this.state.navHeight;
-    if (sticky !== this.state.sticky) this.setState({ sticky });
-  };
-
-  getNavHeight = el => {
-    this.setState({
-      navHeight: el.offsetHeight
-    });
-  };
-
   render() {
-    return (
-      !this.state.isAuthenticating && (
-        <Routes
-          sticky={this.state.sticky}
-          navHeight={this.state.navHeight}
-          getNavHeight={this.getNavHeight}
-          isAuthenticated={this.state.isAuthenticated}
-          userHasAuthenticated={this.userHasAuthenticated}
-          handleLogout={this.handleLogout}
-        />
-      )
-    );
+    return this.props.isAuthenticating && <Routes />;
   }
 }
 
-export default App;
+App.propTypes = {
+  isAuthenticating: PropTypes.bool.isRequired,
+  navHeight: PropTypes.number.isRequired,
+  sticky: PropTypes.bool.isRequired,
+  updateSticky: PropTypes.func.isRequired
+};
+
+export default connect(
+  state => ({
+    isAuthenticating: state.isAuthenticating,
+    sticky: state.sticky,
+    navHeight: state.navHeight
+  }),
+
+  dispatch => ({
+    updateSticky: sticky => {
+      dispatch(updateSticky(sticky));
+    }
+  })
+)(App);

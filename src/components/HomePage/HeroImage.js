@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FionaImage from "../../assets/Gillian's BD Coffee 072 - Copy.JPG";
+import { connect } from "react-redux";
 
 const HeroImage = styled.div`
   background-image: url("${FionaImage}");

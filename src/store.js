@@ -1,7 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
-import * as reducers from "./reducers";
+import * as reducers from "./reducers/reducers";
 import posts from "./data/posts";
 
 const defaultStore = {

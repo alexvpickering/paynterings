@@ -1,35 +1,36 @@
-// add post
+import * as actions from "./actions";
+
 export function addPost(post) {
   return {
-    type: "ADD_POST",
+    type: actions.ADD_POST,
     post
   };
 }
 
-export function updateNavHeight(navHeight) {
+export function setNavHeight(navHeight) {
   return {
-    type: "UPDATE_NAV_HEIGHT",
+    type: actions.SET_NAV_HEIGHT,
     navHeight
   };
 }
 
 export function updateSticky(sticky) {
   return {
-    type: "UPDATE_STICKY",
+    type: actions.UPDATE_STICKY,
     sticky
   };
 }
 
 export function updateAuthenticating(isAuthenticating) {
   return {
-    type: "UPDATE_AUTHENTICATING",
+    type: actions.UPDATE_AUTHENTICATING,
     isAuthenticating
   };
 }
 
 export function updateAuthenticated(isAuthenticated) {
   return {
-    type: "UPDATE_AUTHENTICATED",
+    type: actions.UPDATE_AUTHENTICATED,
     isAuthenticated
   };
 }

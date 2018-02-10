@@ -5,56 +5,12 @@ import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AddPage from "./components/AddPage/AddPage";
 
-export default ({
-  sticky,
-  navHeight,
-  getNavHeight,
-  isAuthenticated,
-  userHasAuthenticated,
-  handleLogout
-}) => {
+export default ({}) => {
   return (
     <Switch>
-      <Route
-        exact
-        path="/"
-        render={props => (
-          <HomePage
-            {...props}
-            sticky={sticky}
-            navHeight={navHeight}
-            getNavHeight={getNavHeight}
-            isAuthenticated={isAuthenticated}
-            handleLogout={handleLogout}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/login"
-        render={props => (
-          <LoginPage
-            {...props}
-            navHeight={navHeight}
-            getNavHeight={getNavHeight}
-            isAuthenticated={isAuthenticated}
-            userHasAuthenticated={userHasAuthenticated}
-            handleLogout={handleLogout}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/add"
-        render={props => (
-          <AddPage
-            {...props}
-            navHeight={navHeight}
-            getNavHeight={getNavHeight}
-            handleLogout={handleLogout}
-          />
-        )}
-      />
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/add" component={AddPage} />
     </Switch>
   );
 };

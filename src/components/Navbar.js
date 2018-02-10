@@ -46,30 +46,21 @@ const Logo = styled(Link)`
 
 class Navbar extends React.Component {
   componentDidMount() {
-    if (this.props.getNavHeight) this.props.getNavHeight(this.header);
+    this.props.setNavHeight(this.header.offsetHeight);
   }
-
-  handleLogout = e => {
-    e.preventDefault();
-    console.log("loging out");
-
-    this.props.handleLogout();
-  };
 
   render() {
     return (
       <Header
-        innerRef={input => (this.header = input)}
         sticky={this.props.sticky}
+        innerRef={input => (this.header = input)}
       >
         <Logo to="/">
           <i className="fa fa-home" />
           <span className="paynterings">Paynterings</span>
         </Logo>
         {this.props.isAuthenticated ? (
-          <Link to="/logout" onClick={this.handleLogout}>
-            logout
-          </Link>
+          <Link to="/logout">logout</Link>
         ) : (
           <Link to="/login">login</Link>
         )}
