@@ -1,6 +1,5 @@
 export const ADD_POST = "ADD_POST";
 
-export const SET_NAV_HEIGHT = "SET_NAV_HEIGHT";
 export const UPDATE_STICKY = "UPDATE_STICKY";
 
 export const UPDATE_AUTHENTICATING = "UPDATE_AUTHENTICATING";

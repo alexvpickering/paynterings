@@ -7,13 +7,6 @@ export function addPost(post) {
   };
 }
 
-export function setNavHeight(navHeight) {
-  return {
-    type: actions.SET_NAV_HEIGHT,
-    navHeight
-  };
-}
-
 export function updateSticky(sticky) {
   return {
     type: actions.UPDATE_STICKY,

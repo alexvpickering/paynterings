@@ -1,19 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { setNavHeight } from "../../actions/actionCreators";
 
 import Navbar from "../Navbar";
 import PostGrid from "./PostGrid";
 import HeroImage from "./HeroImage";
 import PostPreview from "./PostPreview";
 
-const HomePage = ({ posts, sticky, navHeight, setNavHeight }) => {
+const HomePage = ({ posts, sticky }) => {
   return (
     <div>
-      <HeroImage navHeight={navHeight} />
-      <Navbar sticky={sticky} setNavHeight={setNavHeight} />
-      <PostGrid sticky={sticky} navHeight={navHeight}>
+      <HeroImage />
+      <Navbar sticky={sticky} />
+      <PostGrid sticky={sticky}>
         {posts.map((post, i) => (
           <PostPreview
             video={post.video}
@@ -28,19 +27,15 @@ const HomePage = ({ posts, sticky, navHeight, setNavHeight }) => {
 };
 
 HomePage.propTypes = {
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
+  sticky: PropTypes.bool.isRequired
 };
 
 // connect to store
 export default connect(
   state => ({
     posts: state.posts,
-    sticky: state.sticky,
-    navHeight: state.navHeight
+    sticky: state.sticky
   }),
-  dispatch => ({
-    setNavHeight: navHeight => {
-      dispatch(setNavHeight(navHeight));
-    }
-  })
+  null
 )(HomePage);

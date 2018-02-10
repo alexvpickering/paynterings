@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import App from "./App.js";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import store from "./store.js";
-import { BrowserRouter as Router } from "react-router-dom";
 
 import { injectGlobal, ThemeProvider } from "styled-components";
 import styledNormalize from "styled-normalize";
@@ -19,12 +18,10 @@ injectGlobal`
   ${rh5v}
 `;
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <App />
-      </Router>
+      <App />
     </ThemeProvider>
   </Provider>,
   document.getElementById("root")

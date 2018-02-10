@@ -2,33 +2,25 @@ import React from "react";
 import Navbar from "../Navbar";
 import PropTypes from "prop-types";
 import LoginForm from "./LoginForm";
+import { connect } from "react-redux";
+import { updateAuthenticated } from "../../actions/actionCreators";
 
-const LoginPage = ({
-  history,
-  navHeight,
-  getNavHeight,
-  userHasAuthenticated,
-  isAuthenticated,
-  handleLogout
-}) => {
+const LoginPage = ({ history, updateAuthenticated }) => {
   return (
     <div>
-      <Navbar
-        getNavHeight={getNavHeight}
-        isAuthenticated={isAuthenticated}
-        handleLogout={handleLogout}
-      />
-      <LoginForm
-        userHasAuthenticated={userHasAuthenticated}
-        history={history}
-      />
+      <Navbar />
+      <LoginForm updateAuthenticated={updateAuthenticated} history={history} />
     </div>
   );
 };
 
 LoginPage.propTypes = {
-  navHeight: PropTypes.number.isRequired,
-  getNavHeight: PropTypes.func.isRequired
+  updateAuthenticated: PropTypes.func.isRequired
 };
 
-export default LoginPage;
+// connect to store
+export default connect(null, dispatch => ({
+  updateAuthenticated: authenticated => {
+    dispatch(updateAuthenticated(authenticated));
+  }
+}))(LoginPage);

@@ -1,12 +1,12 @@
 import React from "react";
 import { FormContainer, Form, Input, Button } from "../Form/Form";
 import config from "../../config";
+import PropTypes from "prop-types";
 import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser
 } from "amazon-cognito-identity-js";
-import { Redirect } from "react-router";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -36,7 +36,6 @@ class LoginForm extends React.Component {
   }
 
   validateForm() {
-    console.log("validating");
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
@@ -51,7 +50,7 @@ class LoginForm extends React.Component {
 
     try {
       await this.login(this.state.email, this.state.password);
-      this.props.userHasAuthenticated(true);
+      this.props.updateAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
       alert(e);
@@ -84,5 +83,9 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  updateAuthenticated: PropTypes.func.isRequired
+};
 
 export default LoginForm;
