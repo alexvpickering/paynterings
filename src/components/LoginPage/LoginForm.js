@@ -1,5 +1,7 @@
 import React from "react";
-import { FormContainer, Form, Input, Button } from "../Form/Form";
+import { FormContainer, Form } from "../Form/Form";
+import { Input } from "../Form/Inputs";
+import LoaderButton from "../Form/LoaderButton";
 import config from "../../config";
 import PropTypes from "prop-types";
 import {
@@ -14,7 +16,8 @@ class LoginForm extends React.Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      isLoading: false
     };
   }
 
@@ -48,12 +51,15 @@ class LoginForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
+    this.setState({ isLoading: true });
+
     try {
       await this.login(this.state.email, this.state.password);
       this.props.updateAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
       alert(e);
+      this.setState({ isLoading: false });
     }
   };
 
@@ -77,7 +83,14 @@ class LoginForm extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-          <Button>Sign in</Button>
+          <LoaderButton
+            isLoading={this.state.isLoading}
+            disabled={!this.validateForm()}
+            text="Sign in"
+            loadingText="Sign in"
+          >
+            Sign in
+          </LoaderButton>
         </Form>
       </FormContainer>
     );

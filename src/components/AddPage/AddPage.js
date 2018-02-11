@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 import PropTypes from "prop-types";
 import AddForm from "./AddForm";
 
@@ -13,9 +13,6 @@ const AddPage = ({ navHeight, getNavHeight }) => {
   );
 };
 
-AddPage.propTypes = {
-  navHeight: PropTypes.number.isRequired,
-  getNavHeight: PropTypes.func.isRequired
-};
+AddPage.propTypes = {};
 
 export default AddPage;

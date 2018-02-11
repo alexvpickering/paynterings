@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 import PostGrid from "./PostGrid";
 import HeroImage from "./HeroImage";
 import PostPreview from "./PostPreview";
