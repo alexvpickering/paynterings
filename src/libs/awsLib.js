@@ -1,6 +1,7 @@
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 import AWS from "aws-sdk";
 import config from "../config";
+import sigV4Client from "./sigV4Client";
 
 export async function authUser() {
   if (
@@ -48,6 +49,11 @@ export function signOutUser() {
 
   if (currentUser !== null) {
     currentUser.signOut();
+  }
+
+  if (AWS.config.credentials) {
+    AWS.config.credentials.clearCachedId();
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({});
   }
 }
 
@@ -98,7 +104,57 @@ export async function invokeApig({
   body = body ? JSON.stringify(body) : body;
   headers = signedRequest.headers;
 
+  console.log(headers);
+
   const results = await fetch(signedRequest.url, {
+    method,
+    headers,
+    body
+  });
+
+  if (results.status !== 200) {
+    throw new Error(await results.text());
+  }
+
+  return results.json();
+}
+
+export async function s3Upload(file) {
+  if (!await authUser()) {
+    throw new Error("User is not logged in");
+  }
+
+  const s3 = new AWS.S3({
+    params: {
+      Bucket: config.s3.BUCKET
+    }
+  });
+  const filename = `${AWS.config.credentials.identityId}-${Date.now()}-${
+    file.name
+  }`;
+
+  return s3
+    .upload({
+      Key: filename,
+      Body: file,
+      ContentType: file.type,
+      ACL: "public-read"
+    })
+    .promise();
+}
+
+export async function invokeOpenApig({
+  path,
+  method = "GET",
+  headers = {},
+  queryParams = {},
+  body
+}) {
+  const url = `${config.apiGateway.URL}/${path}`;
+
+  body = body ? JSON.stringify(body) : body;
+
+  const results = await fetch(url, {
     method,
     headers,
     body

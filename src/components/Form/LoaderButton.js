@@ -25,6 +25,21 @@ const Button = styled.button.attrs({
   ${ButtonStyles};
 `;
 
+const Glyphicon = styled.i`
+  margin-right: 7px;
+  top: 2px;
+  animation: spin 1.2s infinite linear;
+
+  @keyframes spin {
+    from {
+      transform: scale(1) rotate(0deg);
+    }
+    to {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+`;
+
 const LoaderButton = ({
   isLoading,
   text,
@@ -33,6 +48,7 @@ const LoaderButton = ({
   ...props
 }) => (
   <Button disabled={disabled || isLoading} {...props}>
+    {isLoading && <Glyphicon className="fas fa-sun" />}
     {!isLoading ? text : loadingText}
   </Button>
 );

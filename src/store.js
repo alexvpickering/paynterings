@@ -1,15 +1,13 @@
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
-import { routerMiddleware } from "react-router-redux";
 import { createLogger } from "redux-logger";
 import * as reducers from "./reducers/reducers";
-import posts from "./data/posts";
 
 const defaultStore = {
   sticky: false,
   isAuthenticated: false,
   isAuthenticating: true,
-  posts
+  posts: []
 };
 
 const loggerMiddleware = createLogger();

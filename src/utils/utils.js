@@ -5,3 +5,12 @@ export function truncateString(string, maxLength) {
 
   return `${string.substring(0, maxLength - 4)} ...`;
 }
+
+export const monthGroups = [
+  ["January", "February", "March"],
+  ["April", "May", "June"],
+  ["July", "August", "September"],
+  ["October", "November", "December"]
+];
+
+export const months = [].concat(...monthGroups);

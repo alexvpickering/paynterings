@@ -1,9 +1,9 @@
 import * as actions from "./actions";
 
-export function addPost(post) {
+export function addPosts(posts) {
   return {
-    type: actions.ADD_POST,
-    post
+    type: actions.ADD_POSTS,
+    posts
   };
 }
 

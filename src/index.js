@@ -4,7 +4,6 @@ import App from "./App.js";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import store from "./store.js";
-import { push } from "react-router-redux";
 
 import { injectGlobal, ThemeProvider } from "styled-components";
 import styledNormalize from "styled-normalize";

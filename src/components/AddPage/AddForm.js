@@ -1,9 +1,14 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { addPosts } from "../../actions/actionCreators";
 import { FormContainer, Form } from "../Form/Form";
 import { Input, FileInput, FileInputLabel, InlineInputs } from "../Form/Inputs";
 import LoaderButton from "../Form/LoaderButton";
 import MonthPicker from "../Form/MonthPicker/MonthPicker";
 import config from "../../config";
+import { invokeApig, s3Upload } from "../../libs/awsLib";
+import { months } from "../../utils/utils";
 
 import { truncateString } from "../../utils/utils";
 
@@ -21,7 +26,7 @@ class AddForm extends React.Component {
   }
 
   validateForm() {
-    return this.state.title.length > 0;
+    return this.state.title.length > 0 && this.state.file;
   }
 
   handleChange = event => {
@@ -47,7 +52,40 @@ class AddForm extends React.Component {
     }
 
     this.setState({ isLoading: true });
+
+    try {
+      const uploadedFilename = this.state.file
+        ? (await s3Upload(this.state.file)).Location
+        : null;
+
+      const post = await this.createPost({
+        title: this.state.title,
+        videoDate: `${months[this.state.month]} ${this.state.year}`,
+        attachment: uploadedFilename
+      });
+
+      this.props.addPosts([
+        {
+          title: post.title,
+          videoDate: post.videoDate,
+          attachment: post.attachment
+        }
+      ]);
+
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e);
+      this.setState({ isLoading: false });
+    }
   };
+
+  createPost(post) {
+    return invokeApig({
+      path: "/posts",
+      method: "POST",
+      body: post
+    });
+  }
 
   render() {
     return (
@@ -83,8 +121,9 @@ class AddForm extends React.Component {
             type="submit"
             disabled={!this.validateForm()}
             isLoading={this.state.isLoading}
+            onClick={this.handleSubmit}
             text="Add Post"
-            loadingText="Add Post"
+            loadingText=" adding ..."
           />
         </Form>
       </FormContainer>
@@ -92,4 +131,7 @@ class AddForm extends React.Component {
   }
 }
 
-export default AddForm;
+// connect to store
+export default connect(null, dispatch => ({
+  addPosts: posts => dispatch(addPosts(posts))
+}))(withRouter(AddForm));

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import ReactS3Uploader from "react-s3-uploader";
 
 export const Input = styled.input`
   display: block;

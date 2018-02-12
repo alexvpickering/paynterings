@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import { history } from "./store";
 import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AddPage from "./components/AddPage/AddPage";

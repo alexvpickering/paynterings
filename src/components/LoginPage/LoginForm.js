@@ -87,7 +87,7 @@ class LoginForm extends React.Component {
             isLoading={this.state.isLoading}
             disabled={!this.validateForm()}
             text="Sign in"
-            loadingText="Sign in"
+            loadingText="signing in ..."
           >
             Sign in
           </LoaderButton>

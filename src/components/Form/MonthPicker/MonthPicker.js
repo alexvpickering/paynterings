@@ -10,15 +10,7 @@ import {
   MonthButton,
   NavigateYear
 } from "./styles";
-
-const monthGroups = [
-  ["January", "February", "March"],
-  ["April", "May", "June"],
-  ["July", "August", "September"],
-  ["October", "November", "December"]
-];
-
-const months = [].concat(...monthGroups);
+import { months, monthGroups } from "../../../utils/utils";
 
 class MonthPicker extends React.Component {
   constructor(props) {
@@ -37,7 +29,6 @@ class MonthPicker extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mounted");
     window.addEventListener("click", this.handleClick);
   }
 
