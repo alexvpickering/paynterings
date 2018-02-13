@@ -1,12 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { addPosts } from "../../actions/actionCreators";
 import { FormContainer, Form } from "../Form/Form";
 import { Input, FileInput, FileInputLabel, InlineInputs } from "../Form/Inputs";
 import LoaderButton from "../Form/LoaderButton";
 import MonthPicker from "../Form/MonthPicker/MonthPicker";
-import config from "../../config";
 import { invokeApig, s3Upload } from "../../libs/awsLib";
 import { months } from "../../utils/utils";
 
@@ -46,11 +43,6 @@ class AddForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    if (this.state.file && this.state.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert("Please pick a file smaller than 1GB");
-      return;
-    }
-
     this.setState({ isLoading: true });
 
     try {
@@ -58,19 +50,11 @@ class AddForm extends React.Component {
         ? (await s3Upload(this.state.file)).Location
         : null;
 
-      const post = await this.createPost({
+      await this.createPost({
         title: this.state.title,
         videoDate: `${months[this.state.month]} ${this.state.year}`,
         attachment: uploadedFilename
       });
-
-      this.props.addPosts([
-        {
-          title: post.title,
-          videoDate: post.videoDate,
-          attachment: post.attachment
-        }
-      ]);
 
       this.props.history.push("/");
     } catch (e) {
@@ -132,6 +116,4 @@ class AddForm extends React.Component {
 }
 
 // connect to store
-export default connect(null, dispatch => ({
-  addPosts: posts => dispatch(addPosts(posts))
-}))(withRouter(AddForm));
+export default withRouter(AddForm);

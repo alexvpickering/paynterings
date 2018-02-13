@@ -5,7 +5,7 @@ import AddForm from "./AddForm";
 const AddPage = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar sticky={true} />
       <AddForm />
     </div>
   );

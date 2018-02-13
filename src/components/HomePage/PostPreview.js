@@ -32,7 +32,7 @@ class PostPreview extends React.Component {
   render() {
     return (
       <PreviewWrapper>
-        <Video loop preload="metadata">
+        <Video height="300px" preload="metadata">
           <source src={this.props.video} />
         </Video>
         <TextWrapper>

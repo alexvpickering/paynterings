@@ -8,7 +8,7 @@ import { updateAuthenticated } from "../../actions/actionCreators";
 const LoginPage = ({ history, updateAuthenticated }) => {
   return (
     <div>
-      <Navbar />
+      <Navbar sticky={true} />
       <LoginForm updateAuthenticated={updateAuthenticated} history={history} />
     </div>
   );

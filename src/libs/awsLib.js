@@ -1,5 +1,6 @@
 import { CognitoUserPool } from "amazon-cognito-identity-js";
-import AWS from "aws-sdk";
+import AWS from "aws-sdk/global";
+import S3 from "aws-sdk/clients/s3";
 import config from "../config";
 import sigV4Client from "./sigV4Client";
 
@@ -124,7 +125,7 @@ export async function s3Upload(file) {
     throw new Error("User is not logged in");
   }
 
-  const s3 = new AWS.S3({
+  const s3 = new S3({
     params: {
       Bucket: config.s3.BUCKET
     }

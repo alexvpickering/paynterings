@@ -8,6 +8,11 @@ const HeroImage = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media only screen and (max-width: 767px) {
+    background-attachment: scroll;
+  }
+
 `;
 
 export default HeroImage;

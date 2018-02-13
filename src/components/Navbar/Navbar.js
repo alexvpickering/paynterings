@@ -23,16 +23,18 @@ class Navbar extends React.Component {
         <Logo to="/" isAuthenticated={isAuthenticated}>
           <i className="fa fa-home" />
           <span className="paynterings">Paynterings</span>
+          {/* <img src={paynterings} className="paynterings" alt="" /> */}
         </Logo>
         {isAuthenticated ? (
           <div>
-            <Link to="/add">add</Link>
+            <Link to="/add">Add</Link>
+            <span>&nbsp; / &nbsp;</span>
             <Link to="/logout" onClick={this.handleLogout}>
-              logout
+              Logout
             </Link>
           </div>
         ) : (
-          <Link to="/login">login</Link>
+          <Link to="/login">Login</Link>
         )}
       </Header>
     );

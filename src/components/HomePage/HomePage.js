@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addPosts } from "../../actions/actionCreators";
-
 import Navbar from "../Navbar/Navbar";
 import PostGrid from "./PostGrid";
 import HeroImage from "./HeroImage";
@@ -14,15 +12,17 @@ class HomePage extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: false
+      isLoading: false,
+      posts: []
     };
   }
 
   async componentDidMount() {
     try {
       const results = await this.posts();
-
-      this.props.addPosts(results);
+      this.setState({
+        posts: results.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+      });
     } catch (e) {
       alert(e);
     }
@@ -35,11 +35,9 @@ class HomePage extends React.Component {
   }
 
   renderPosts = () => {
-    // debugger;
-    // console.debug(this.props.posts);
     return (
       <PostGrid sticky={this.props.sticky}>
-        {this.props.posts.map((post, i) => (
+        {this.state.posts.map((post, i) => (
           <PostPreview
             video={post.attachment}
             key={i}
@@ -68,13 +66,8 @@ HomePage.propTypes = {
 };
 
 // connect to store
-export default connect(
-  state => ({
-    posts: state.posts,
-    sticky: state.sticky,
-    isAuthenticated: state.isAuthenticated
-  }),
-  dispatch => ({
-    addPosts: posts => dispatch(addPosts(posts))
-  })
-)(HomePage);
+export default connect(state => ({
+  posts: state.posts,
+  sticky: state.sticky,
+  isAuthenticated: state.isAuthenticated
+}))(HomePage);

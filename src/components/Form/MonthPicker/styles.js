@@ -13,7 +13,7 @@ export const YearContainer = styled.div`
   z-index: 1;
   box-sizing: border-box;
   width: 280px;
-  height: ${props => (props.show ? 294 : 0)}px;
+  height: ${props => (props.show ? 294.75 : 0)}px;
   transition: height 0.2s;
   overflow: hidden;
 `;
