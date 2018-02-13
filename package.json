@@ -23,7 +23,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://paynterings-app-client",
+    "postdeploy":
+      "aws cloudfront create-invalidation --distribution-id E3DN6519AJDG2A --paths '/*' && aws cloudfront create-invalidation --distribution-id E23Q30VDNZZJD2 --paths '/*'"
   },
   "devDependencies": {
     "prop-types": "^15.6.0",
